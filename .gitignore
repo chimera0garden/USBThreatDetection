@@ -7,7 +7,6 @@ __pycache__/
 env/
 venv/
 ENV/
-build/
 develop-eggs/
 dist/
 downloads/
@@ -27,6 +26,10 @@ MANIFEST
 # PyInstaller
 *.manifest
 *.spec.bak
+
+# Build output directories (but keep build scripts)
+build/dist/
+build/__pycache__/
 
 # Unit test / coverage reports
 htmlcov/
