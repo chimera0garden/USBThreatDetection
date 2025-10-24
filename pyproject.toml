@@ -1,0 +1,106 @@
+[build-system]
+requires = ["setuptools>=68.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "usb-threat-detection"
+version = "1.0.0"
+description = "Professional USB Threat Detection system with threat intelligence feed integration"
+readme = "README.md"
+requires-python = ">=3.8"
+license = {text = "MIT"}
+authors = [
+    {name = "USB Threat Detection Contributors"}
+]
+keywords = ["security", "usb", "threat-detection", "malware", "monitoring"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Information Technology",
+    "Intended Audience :: System Administrators",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: Microsoft :: Windows",
+    "Operating System :: POSIX :: Linux",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Security",
+    "Topic :: System :: Monitoring",
+]
+
+dependencies = [
+    "PyQt5>=5.15.0,<6.0.0",
+    "PyYAML>=6.0,<7.0",
+    "requests>=2.31.0,<3.0.0",
+    "certifi>=2023.7.22",
+]
+
+[project.optional-dependencies]
+linux = [
+    "pyusb>=1.2.1",
+    "psutil>=5.9.0",
+]
+windows = [
+    "pywin32>=305",
+    "wmi>=1.5.1",
+]
+threat-intel = [
+    "pymisp>=2.4.170",
+    "stix2>=3.0.1",
+]
+dev = [
+    "pytest>=7.4.0,<8.0.0",
+    "pytest-cov>=4.1.0,<5.0.0",
+    "pytest-mock>=3.11.1,<4.0.0",
+    "pytest-qt>=4.2.0,<5.0.0",
+    "black>=23.7.0,<24.0.0",
+    "flake8>=6.1.0,<7.0.0",
+    "mypy>=1.5.0,<2.0.0",
+    "pylint>=2.17.0,<3.0.0",
+    "types-requests>=2.31.0",
+    "types-PyYAML>=6.0.12",
+    "pip-audit>=2.6.0",
+    "pyinstaller>=5.13.0,<6.0.0",
+]
+
+[project.scripts]
+usb-threat-detection = "src.ThreatDetectionSoftware:main"
+usb-threat-smoke-test = "tests.smoke_test:main"
+
+[project.urls]
+Homepage = "https://github.com/chimera0garden/USBThreatDetection"
+Issues = "https://github.com/chimera0garden/USBThreatDetection/issues"
+Repository = "https://github.com/chimera0garden/USBThreatDetection"
+
+[tool.black]
+line-length = 100
+target-version = ['py38', 'py39', 'py310', 'py311', 'py312']
+
+[tool.mypy]
+python_version = "3.8"
+warn_return_any = true
+warn_unused_configs = true
+disallow_untyped_defs = false
+ignore_missing_imports = true
+
+[tool.pytest.ini_options]
+minversion = "7.0"
+addopts = "-ra -q --strict-markers --cov=src --cov-report=html --cov-report=term"
+testpaths = ["tests"]
+pythonpath = ["."]
+
+[tool.coverage.run]
+source = ["src"]
+omit = ["*/tests/*", "*/test_*.py"]
+
+[tool.coverage.report]
+exclude_lines = [
+    "pragma: no cover",
+    "def __repr__",
+    "raise AssertionError",
+    "raise NotImplementedError",
+    "if __name__ == .__main__.:",
+    "if TYPE_CHECKING:",
+]

@@ -1,0 +1,114 @@
+# USB Threat Detection Configuration
+
+# Database settings
+database:
+  path: "usb_threat_detection.db"
+  # Enable WAL mode for better concurrency
+  wal_mode: true
+
+# Logging configuration
+logging:
+  file: "usb_detection.log"
+  level: "INFO"  # DEBUG, INFO, WARNING, ERROR, CRITICAL
+  max_bytes: 10485760  # 10 MB
+  backup_count: 5
+  format: "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+
+# USB Monitoring settings
+monitoring:
+  # Scan interval in seconds (for polling-based backends like pyusb)
+  scan_interval: 5
+  # Enable hotplug events (pyudev on Linux, WMI on Windows)
+  enable_hotplug: true
+  # Monitor removable drives for file scanning
+  scan_files: true
+  # Maximum file scan depth
+  max_scan_depth: 3
+  # File size limit for scanning (bytes, 0 = no limit)
+  max_file_size: 104857600  # 100 MB
+
+# Threat detection settings
+detection:
+  # Enable signature-based detection
+  enable_signatures: true
+  # Enable heuristic analysis
+  enable_heuristics: true
+  # Minimum threat score to trigger alert (0-100)
+  alert_threshold: 50
+  # Enable desktop notifications
+  enable_notifications: true
+
+# Threat intelligence feeds
+feeds:
+  # Enable threat feed integration
+  enable: true
+  # Update interval in seconds (3600 = 1 hour)
+  update_interval: 3600
+  # Cache TTL in seconds (86400 = 24 hours)
+  cache_ttl: 86400
+  # Request timeout in seconds
+  timeout: 30
+  # Maximum feed size in bytes (10 MB)
+  max_feed_size: 10485760
+  # Threat feed sources
+  sources: []
+    # Example STIX 2.0 feed:
+    # - name: "Example STIX Feed"
+    #   url: "https://example.com/stix2-feed.json"
+    #   format: "stix2"
+    #   enabled: true
+    #   verify_ssl: true
+    #
+    # Example MISP feed:
+    # - name: "Example MISP"
+    #   url: "https://misp.example.com"
+    #   format: "misp"
+    #   api_key: "your-api-key-here"
+    #   enabled: true
+    #   verify_ssl: true
+
+# Whitelist settings
+whitelist:
+  # Enable device whitelisting
+  enable: true
+  # Whitelist file location
+  file: "whitelist.yaml"
+  # Devices to always trust (by VID:PID)
+  devices: []
+    # Example:
+    # - vid: "0x1234"
+    #   pid: "0x5678"
+    #   description: "My trusted USB device"
+    #   serial: ""  # Optional: specific serial number
+
+# GUI settings
+gui:
+  # Window dimensions
+  window_width: 1024
+  window_height: 768
+  # Theme
+  theme: "light"  # light or dark
+  # Show system tray icon
+  show_tray_icon: true
+  # Minimize to tray on close
+  minimize_to_tray: false
+  # Refresh interval for device list (milliseconds)
+  refresh_interval: 1000
+
+# Security settings
+security:
+  # Verify SSL certificates for HTTPS requests
+  verify_ssl: true
+  # Maximum redirects to follow
+  max_redirects: 3
+  # User agent for HTTP requests
+  user_agent: "USBThreatDetection/1.0"
+
+# Performance settings
+performance:
+  # Maximum worker threads
+  max_workers: 4
+  # Enable async operations
+  async_mode: true
+  # Database connection pool size
+  db_pool_size: 5

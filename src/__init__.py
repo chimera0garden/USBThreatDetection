@@ -1,0 +1,5 @@
+"""USB Threat Detection System."""
+
+__version__ = "1.0.0"
+__author__ = "USB Threat Detection Contributors"
+__license__ = "MIT"

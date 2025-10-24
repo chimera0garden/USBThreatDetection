@@ -1,0 +1,29 @@
+# Core dependencies
+PyQt5>=5.15.0,<6.0.0
+PyYAML>=6.0,<7.0
+
+# Database
+# SQLite is included in Python standard library
+
+# HTTP requests for threat feeds
+requests>=2.31.0,<3.0.0
+certifi>=2023.7.22
+
+# Linux USB monitoring (optional - either option works)
+# Option A: pyusb (fallback, polling-based)
+pyusb>=1.2.1; sys_platform == 'linux'
+
+# Option B: pyudev (preferred, event-based)
+# Uncomment if you prefer pyudev over pyusb:
+# pyudev>=0.24.0; sys_platform == 'linux'
+
+# Cross-platform system utilities
+psutil>=5.9.0; sys_platform == 'linux'
+
+# Windows USB monitoring (optional)
+pywin32>=305; sys_platform == 'win32'
+wmi>=1.5.1; sys_platform == 'win32'
+
+# Optional threat intelligence integrations
+pymisp>=2.4.170
+stix2>=3.0.1
